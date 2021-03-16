@@ -1,0 +1,145 @@
+root/TxjJz1zqb7#DskJz1hdz5
+admin/YjyqHy7#Xcy4Hys
+
+系统蜜罐都是1qazcde3    有服务的都是qwedcvbhuio
+
+
+
+下载账户
+honey/uwYvDxkZuP17jQEv
+压缩包密码：honeypot210_hardware@P@ssw0rd
+-----------------------------软件版----------------------------------
+分析中心软件安装包：
+http://10.20.129.202/mainline/analysis/v2.0.8/soft-v/installer_package.tar.gz
+仿真引擎软件安装包：
+http://10.20.129.202/mainline/engine/v2.0.8/HPOT_V2.0.8_ENGINE.tar.gz
+软件版虚拟机基础操作系统（安装分析中心/引擎的系统centos1810）：
+链接：https://pan.baidu.com/s/177TTrqNzBM_xwWZ_lQg28w 
+提取码：as2u
+软件版高交互蜜罐基础系统镜像（三选一）
+http://10.20.129.202/mainline/engine/v2.0.8/node_env/centos7.qcow2
+http://10.20.129.202/mainline/engine/v2.0.8/node_env/node_env/centos7_vmware_workstation.vmdk
+http://10.20.129.202/mainline/engine/v2.0.8/node_env/v2.0.8/node_env/centos7_vmware_workstation.vmdk.tar
+# 1、对于VMWARE ESXI平台，可参考：https://dev-tang.com/post/2020/03/esxi-vmdk.html
+# 2、对于VMWARE WorkStation平台，下载centos7_vmware_workstation.vmdk后使用tar -xvf 进行解压得到vmdk文件。使用时可先创建空虚拟机，选择磁盘时选择当前vmdk，磁盘总线类型选择IDE模式；
+
+-----------------------------硬件版----------------------------------
+http://10.20.129.202/analysis/v2.0.8/hard-v/HPOT_V2.0.8_3000.tar.gz
+http://10.20.129.202/analysis/v2.0.8/hard-v/HPOT_V2.0.8_3000.tar.gz.md5
+http://10.20.129.202/analysis/v2.0.8/hard-v/HPOT_V2.0.8_500.tar.gz       0427
+http://10.20.129.202/analysis/v2.0.8/hard-v/HPOT_V2.0.8_500.tar.gz.md5
+-----------------------------补丁包----------------------------------
+镜像及程序补丁包1（约6个G）：
+http://10.20.129.202/analysis/v2.0.8/soft-v/patch.tar.gz
+证书补丁包2（约6K）：
+http://10.20.129.202/analysis/v2.0.8/soft-v/CA_simulate.tar.gz
+http://10.20.129.202/analysis/v2.0.8/soft-v/CA_webcenter.tar.gz
+
+
+
+【常用排错命令】
+查看系统是否支持虚拟化
+cat /proc/cpuinfo | egrep "vmx|svm"
+lsmod| grep kvm
+
+查看系统报错日志
+分析中心：tail -f /home/data/log/honeypot-webcenter/webcenter.err
+仿真引擎：tail -f /var/log/simulate/simulate.err
+
+查看数采队列
+docker exec -it rabbitmq rabbitmqctl list_queues -p message | grep -E "hermes|mnemo"
+清空数采队列
+docker exec -it rabbitmq rabbitmqctl purge_queue hermes -p message
+docker exec -it rabbitmq rabbitmqctl purge_queue mnemo -p message
+
+查看系统运行进程
+ps aux |grep honeypot
+ps aux |grep simulate
+
+快速探测网段内存活主机
+nmap -sP --min-parallelism 1024  10.1.1.0/24
+nmap -sV 10.1.1.1 -p 80,443
+ nmap localhost    #查看主机当前开放的端口
+ nmap -p 1024-65535 localhost    #查看主机端口（1024-65535）中开放的端口
+ nmap -PS 192.168.21.163        #探测目标主机开放的端口
+ nmap -PS22,80,3306  192.168.21.163    #探测所列出的目标主机端口
+ nmap -O 192.168.21.163    #探测目标主机操作系统类型
+ nmap -A 192.168.21.163    #探测目标主机操作系统类型
+
+
+强制安装rpm
+rpm -ivh *.rpm --nodeps --force
+
+SCP命令
+scp local_file remote_username@remote_ip:remote_folder 
+
+复制文件至docker中
+docker cp  file.file mysql:/
+
+mysql执行脚本
+source sql.sql;
+
+
+查找超过800M大小的文件
+find . -type f -size +800M  -print0 | xargs -0 ls -l
+
+安装docker
+sudo yum install -y-yum-utils device-mapper-persistent-data lvm2
+   13  sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+   14  ip add
+   15  vi ifcfg-enp0s3 
+   16  systemctl restart network
+   17  ip add
+   18  ping baidu.com
+   19  ip add
+   20  route 
+   21  ip route
+   22  ping 10.20.38.244
+   23  ping 10.11.38.244
+   24  ip add
+   25  sudo yum install -y-yum-utils device-mapper-persistent-data lvm2
+   26  sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+   27  sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+   28  https://download.docker.com/linux/centos/docker-ce.repo
+   29  sudo yum makecache fast
+   30  sudo yum install -y docker-ce
+   31  sudo systemctl enable docker.service
+   32  docker ps -a
+   33  systemctl status docker 
+   34  systemctl start docker 
+   35  systemctl status docker 
+   36  docker ps -a
+   37  docker pull mysql:5.7.31
+   38  mysql -p
+   39  docker exec -it mysql bask
+   40  docker run msql
+   41  docker images
+   42  docker run mysql:5.7.31
+   43  docker ps -a
+
+统计文件夹下文件数量
+ls -l | grep "^-" | wc -l
+
+修改CentOS时间
+ touch  /etc/sysconfig/clock
+ vi /etc/sysconfig/clock
+###
+ZONE=“Asia/Shanghai”
+UTC=false
+ARC=false
+###
+ rm -rf /etc/localtime
+ln -s /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
+date -s "2020-12-11 17:35:30"
+hwclock --systohc
+hwclock --show
+hwclock -w
+
+
+
+通过建软链接的方式把实际存储路径改到home分区下
+systemctl stop docker
+mkdir -p /home/data/docker
+mv /var/lib/docker /home/data
+ln -s /home/data/docker  /var/lib/docker
+systemctl start docker
